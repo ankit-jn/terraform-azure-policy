@@ -24,8 +24,23 @@ module "initiatives" {
     
     custom_policies = each.value.custom_policies
     builtin_policies = each.value.builtin_policies
+}
 
-    assignments = each.value.assignments
-    role_definition_ids = each.value.role_definition_ids
-    non_compliance_messages = each.value.non_compliance_messages
+module "initiatives_assignments" {
+    source = "./assignments"
+
+    for_each = { for initiative in local.initiatives: initiative.name => initiative }
+
+    policy_definition_id = module.initiatives[each.key].configuration.id
+    policy_name = module.initiatives[each.key].configuration.name
+
+    assignments = try(each.value.assignments, [])
+    
+    metadata = each.value.metadata
+    non_compliance_messages = try(each.value.non_compliance_messages, {})
+    
+    specific_role_definition_ids = try(each.value.role_definition_ids, [])
+    policy_role_definition_ids = module.initiatives[each.key].configuration.role_definition_ids
+    
+    role_assignment_scope = try(each.value.role_assignment_scope, null)
 }

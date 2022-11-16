@@ -3,11 +3,11 @@ resource azurerm_management_group_policy_assignment "this" {
 
     for_each = local.mg_assignments
 
-    policy_definition_id = azurerm_policy_set_definition.this.id
+    policy_definition_id = var.policy_definition_id
     management_group_id  = each.value.scope
     not_scopes           = each.value.not_scopes
 
-    name         = lower(coalesce(try(each.value.name, ""), var.name))
+    name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
     metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
@@ -41,11 +41,11 @@ resource azurerm_subscription_policy_assignment "this" {
 
     for_each = local.subscription_assignments
 
-    policy_definition_id = azurerm_policy_set_definition.this.id
+    policy_definition_id = var.policy_definition_id
     subscription_id      = each.value.scope
     not_scopes           = each.value.not_scopes
 
-    name         = lower(coalesce(try(each.value.name, ""), var.name))
+    name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
     metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
@@ -78,11 +78,11 @@ resource azurerm_resource_group_policy_assignment "this" {
 
     for_each = local.rg_assignments
 
-    policy_definition_id = azurerm_policy_set_definition.this.id
+    policy_definition_id = var.policy_definition_id
     resource_group_id    = each.value.scope
     not_scopes           = each.value.not_scopes
 
-    name         = lower(coalesce(try(each.value.name, ""), var.name))
+    name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
     metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
@@ -115,11 +115,11 @@ resource azurerm_resource_policy_assignment "this" {
 
     for_each = local.resource_assignments
 
-    policy_definition_id = azurerm_policy_set_definition.this.id
+    policy_definition_id = var.policy_definition_id
     resource_id          = each.value.scope
     not_scopes           = each.value.not_scopes
 
-    name         = lower(coalesce(try(each.value.name, ""), var.name))
+    name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
     metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
