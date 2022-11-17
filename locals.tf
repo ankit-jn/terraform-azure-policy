@@ -40,14 +40,14 @@ locals {
                                                         && length(try(policy.assignments, [])) > 0) ]
 
     ## In memory presentation of Assignment for BuiltIn Policies
-    builtin_policy_assignments = [ for policy in local.builtin_policies: {
-                                                    id = local.builtin_policy_configs[policy].id
-                                                    name = policy
+    builtin_policy_assignments = [ for policy in var.policies: {
+                                                    id = local.builtin_policy_configs[policy.name].id
+                                                    name = policy.name
                                                     assignments = policy.assignments
-                                                    metadata = local.builtin_policy_configs[policy].metadata
+                                                    metadata = local.builtin_policy_configs[policy.name].metadata
                                                     non_compliance_messages = try(policy.non_compliance_messages, {})
                                                     specific_role_definition_ids = try(policy.role_definition_ids, [])
-                                                    policy_role_definition_ids = local.builtin_policy_configs[policy].role_definition_ids
+                                                    policy_role_definition_ids = local.builtin_policy_configs[policy.name].role_definition_ids
                                                 } if (lookup(policy, "policy_file", "") == ""
                                                         && length(try(policy.assignments, [])) > 0)]
 
