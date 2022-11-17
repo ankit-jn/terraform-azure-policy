@@ -10,7 +10,7 @@ module "policies" {
     management_group_id = var.management_group_id
 }
 
-module "policies_assignments" {
+module "policy_assignments" {
     source = "./assignments"
 
     for_each = { for policy in local.policy_assignments: policy.name => policy }
@@ -20,13 +20,11 @@ module "policies_assignments" {
 
     assignments = try(each.value.assignments, [])
     
-    metadata = lookup(each.value, "metadata", null)
+    policy_metadata = lookup(each.value, "metadata", null)
     non_compliance_messages = each.value.non_compliance_messages
     
     specific_role_definition_ids = each.value.specific_role_definition_ids
     policy_role_definition_ids = each.value.policy_role_definition_ids
-    
-    role_assignment_scope = each.value.role_assignment_scope
 }
 
 module "initiatives" {
@@ -45,7 +43,7 @@ module "initiatives" {
     builtin_policies = each.value.builtin_policies
 }
 
-module "initiatives_assignments" {
+module "initiative_assignments" {
     source = "./assignments"
 
     for_each = { for initiative in local.initiatives_assignments: initiative.name => initiative }
@@ -55,11 +53,9 @@ module "initiatives_assignments" {
 
     assignments = try(each.value.assignments, [])
     
-    metadata = each.value.metadata
+    policy_metadata = each.value.metadata
     non_compliance_messages = each.value.non_compliance_messages
     
     specific_role_definition_ids = each.value.specific_role_definition_ids
     policy_role_definition_ids = each.value.policy_role_definition_ids
-    
-    role_assignment_scope = each.value.role_assignment_scope
 }

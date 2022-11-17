@@ -14,33 +14,27 @@ variable "policy_name" {
 }
 
 variable assignments {
-    description = "Initiaive assignments"
+    description = "List of Assignments"
     type        = any
 }
 
-variable "metadata" {
-    description = "The metadata for the policy set definition."
+variable "policy_metadata" {
+    description = "The metadata for the policy/Initiative definition."
     type        = any
     default     = null
 }
 
 variable specific_role_definition_ids {
-    description = "Explicit roles to be used for Remediation"
+    description = "Explicit roles to be assigned for Remediation"
     type = list(string)
 }
 
 variable policy_role_definition_ids {
-    description = "Policy roles to be used for Remediation"
+    description = "Policy roles (as per Policy/Initiative Definition) to be assgined for Remediation"
     type = list(string)
 }
 
 variable non_compliance_messages {
-    description = "The optional non-compliance message(s). Key/Value pairs map as policy_definition_reference_id = 'content', use null = 'content' to specify the Default non-compliance message for all member definitions."    
+    description = "(Optional) The Map of non-compliance message(s)"
     type        = any
-}
-
-variable role_assignment_scope {
-    description = "The scope at which role definition(s) will be assigned, defaults to Policy Assignment Scope. Must be full resource IDs. Changing this forces a new resource to be created"
-    type        = string
-    default     = null
 }

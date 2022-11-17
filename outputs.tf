@@ -1,5 +1,5 @@
 output "policies" {
-    description = "The Definition IDs of the Custom Policies"
+    description = "Map of The Definition IDs of the Custom Policies"
     value = { for name, policy in module.policies: name => policy.configuration.id }
 }
 

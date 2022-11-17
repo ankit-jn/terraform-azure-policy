@@ -36,7 +36,6 @@ locals {
                                                     non_compliance_messages = try(policy.non_compliance_messages, {})
                                                     specific_role_definition_ids = try(policy.role_definition_ids, [])
                                                     policy_role_definition_ids = module.policies[policy.name].configuration.role_definition_ids
-                                                    role_assignment_scope = try(policy.role_assignment_scope, null)
                                                 } if (lookup(policy, "policy_file", "") != ""
                                                         && length(try(policy.assignments, [])) > 0) ]
 
@@ -49,7 +48,6 @@ locals {
                                                     non_compliance_messages = try(policy.non_compliance_messages, {})
                                                     specific_role_definition_ids = try(policy.role_definition_ids, [])
                                                     policy_role_definition_ids = local.builtin_policy_configs[policy].role_definition_ids
-                                                    role_assignment_scope = try(policy.role_assignment_scope, null)
                                                 } if (lookup(policy, "policy_file", "") == ""
                                                         && length(try(policy.assignments, [])) > 0)]
 
@@ -83,7 +81,6 @@ locals {
                             non_compliance_messages = try(initiative.non_compliance_messages, {})
                             specific_role_definition_ids = try(initiative.role_definition_ids, [])
                             policy_role_definition_ids = module.initiatives[initiative.name].configuration.role_definition_ids
-                            role_assignment_scope = try(initiative.role_assignment_scope, null)                        
                         }]
 
 }

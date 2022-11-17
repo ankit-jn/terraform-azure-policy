@@ -10,7 +10,7 @@ resource azurerm_management_group_policy_assignment "this" {
     name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
-    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
+    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.policy_metadata)), {}))
     
     enforce  = try(each.value.enforcement_mode, true)
     location = try(each.value.location, null)
@@ -48,7 +48,7 @@ resource azurerm_subscription_policy_assignment "this" {
     name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
-    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
+    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.policy_metadata)), {}))
 
     enforce  = try(each.value.enforcement_mode, true)
     location = try(each.value.location, null)
@@ -85,7 +85,7 @@ resource azurerm_resource_group_policy_assignment "this" {
     name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
-    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
+    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.policy_metadata)), {}))
 
     enforce  = try(each.value.enforcement_mode, true)
     location = try(each.value.location, null)
@@ -122,7 +122,7 @@ resource azurerm_resource_policy_assignment "this" {
     name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
-    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.metadata)), {}))
+    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.policy_metadata)), {}))
 
     enforce  = try(each.value.enforcement_mode, true)
     location = try(each.value.location, null)
