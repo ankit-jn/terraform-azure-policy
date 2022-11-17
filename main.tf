@@ -10,6 +10,25 @@ module "policies" {
     management_group_id = var.management_group_id
 }
 
+module "policies_assignments" {
+    source = "./assignments"
+
+    for_each = { for policy in local.policy_assignments: policy.name => policy }
+
+    policy_definition_id = each.value.id
+    policy_name = each.key
+
+    assignments = try(each.value.assignments, [])
+    
+    metadata = lookup(each.value, "metadata", null)
+    non_compliance_messages = each.value.non_compliance_messages
+    
+    specific_role_definition_ids = each.value.specific_role_definition_ids
+    policy_role_definition_ids = each.value.policy_role_definition_ids
+    
+    role_assignment_scope = each.value.role_assignment_scope
+}
+
 module "initiatives" {
     source = "./initiative"
 
@@ -29,18 +48,18 @@ module "initiatives" {
 module "initiatives_assignments" {
     source = "./assignments"
 
-    for_each = { for initiative in local.initiatives: initiative.name => initiative }
+    for_each = { for initiative in local.initiatives_assignments: initiative.name => initiative }
 
-    policy_definition_id = module.initiatives[each.key].configuration.id
-    policy_name = module.initiatives[each.key].configuration.name
+    policy_definition_id = each.value.id
+    policy_name = each.key
 
     assignments = try(each.value.assignments, [])
     
     metadata = each.value.metadata
-    non_compliance_messages = try(each.value.non_compliance_messages, {})
+    non_compliance_messages = each.value.non_compliance_messages
     
-    specific_role_definition_ids = try(each.value.role_definition_ids, [])
-    policy_role_definition_ids = module.initiatives[each.key].configuration.role_definition_ids
+    specific_role_definition_ids = each.value.specific_role_definition_ids
+    policy_role_definition_ids = each.value.policy_role_definition_ids
     
-    role_assignment_scope = try(each.value.role_assignment_scope, null)
+    role_assignment_scope = each.value.role_assignment_scope
 }
