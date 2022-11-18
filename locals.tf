@@ -22,8 +22,7 @@ locals {
         policy => {
             id                  = data.azurerm_policy_definition.this[policy].id
             name                = data.azurerm_policy_definition.this[policy].name
-            metadata            = try(jsonencode(data.azurerm_policy_definition.this[policy].metadata), null)
-            policy_rule         = try(data.azurerm_policy_definition.this[policy].policy_rule, null)
+            metadata            = try(jsondecode(data.azurerm_policy_definition.this[policy].metadata), {})
             role_definition_ids = try(jsondecode(data.azurerm_policy_definition.this[policy].policy_rule).then.details.roleDefinitionIds, [])
         }}
 
@@ -32,7 +31,7 @@ locals {
                                                     id = module.policies[policy.name].configuration.id
                                                     name = policy.name
                                                     assignments = try(policy.assignments, [])
-                                                    metadata = module.policies[policy.name].configuration.metadata
+                                                    metadata = try(module.policies[policy.name].configuration.metadata, null)
                                                     non_compliance_messages = try(policy.non_compliance_messages, {})
                                                     specific_role_definition_ids = try(policy.role_definition_ids, [])
                                                     policy_role_definition_ids = module.policies[policy.name].configuration.role_definition_ids
@@ -43,7 +42,7 @@ locals {
     builtin_policy_assignments = [ for policy in var.policies: {
                                                     id = local.builtin_policy_configs[policy.name].id
                                                     name = policy.name
-                                                    assignments = policy.assignments
+                                                    assignments = try(policy.assignments, [])
                                                     metadata = local.builtin_policy_configs[policy.name].metadata
                                                     non_compliance_messages = try(policy.non_compliance_messages, {})
                                                     specific_role_definition_ids = try(policy.role_definition_ids, [])

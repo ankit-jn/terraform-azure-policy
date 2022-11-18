@@ -10,7 +10,7 @@ resource azurerm_management_group_policy_assignment "this" {
     name         = lower(coalesce(try(each.value.name, ""), var.policy_name))
     display_name = try(each.value.display_name, "")
     description  = try(each.value.description, "")
-    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), jsondecode(var.policy_metadata)), {}))
+    metadata     = jsonencode(try(coalesce(try(each.value.metadata, ""), var.policy_metadata), {}))
     
     enforce  = try(each.value.enforcement_mode, true)
     location = try(each.value.location, null)
