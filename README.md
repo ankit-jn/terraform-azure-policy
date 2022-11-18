@@ -11,7 +11,7 @@ This module features the following components to be provisioned with different c
 - Subscription Scoped Policy/Initiative Assignment [[azurerm_subscription_policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subscription_policy_assignment)]
 - Resource group Scoped Policy/Initiative Assignment [[azurerm_resource_group_policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group_policy_assignment)]
 - Resource Scoped Policy/Initiative Assignment [[azurerm_resource_policy_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_policy_assignment)]
-- ROle Assignments for Remediation [[azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment)]
+- Role Assignments for Remediation [[azurerm_role_assignment](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/role_assignment)]
 
 ### Requirements
 
@@ -35,20 +35,22 @@ Refer [Configuration Examples](https://github.com/arjstack/terraform-azure-examp
 
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
-| <a name="policies"></a> [policies](#policies) | List of Policies to be created | `any` |  | yes |
-| <a name="initiatives"></a> [initiatives](#initiatives) | List of Initiatives to be created | `any` |  | yes |
+| <a name="policies"></a> [policies](#policies) | List of Configuration Maps of Policies and their assignments. | `any` | `[]` | no |
+| <a name="initiatives"></a> [initiatives](#initiatives) | List of Configuration Maps of Initiatives and their assignments. | `any` | `[]` | no |
 
 ### Nested Configuration Maps:  
 
 #### policies
 
+Each Policy Map is created with the following properties:
+
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
 | <a name="name"></a> [name](#input\_name) | The name of the policy definition. | `string` |  | yes |
-| <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the policy definition. | `string` | ``<Policy Name>` | no |
+| <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the policy definition. | `string` | `<Policy Name>` | no |
 | <a name="description"></a> [description](#input\_description) | The description of the policy definition. | `string` |  | no |type
-| <a name="type"></a> [name](#input\_type) | The policy type. | `string` | `Custom` | no |
-| <a name="mode"></a> [mode](#input\_mode) | The policy resource manager mode that allows you to specify which resource types will be evaluated. | `string` | `All` | no |
+| <a name="type"></a> [name](#input\_type) | The policy type. | `string` | `"Custom"` | no |
+| <a name="mode"></a> [mode](#input\_mode) | The policy resource manager mode that allows you to specify which resource types will be evaluated. | `string` | `"All"` | no |
 | <a name="metadata"></a> [metadata](#input\_metadata) | The metadata for the policy definition. | `any` | <pre>{<br>   "category": "General"<br>   "version": "1.0.0"<br>} | no |
 | <a name="policy_file"></a> [policy_file](#input\_policy\_file) | If need to provision, the policy file name with path, relative to root | `null` |  | no |
 | <a name="assignments"></a> [assignments](#assignments) | List of Policy Assignments at the specified scopes. | `any` | `[]` | no |
@@ -57,16 +59,18 @@ Refer [Configuration Examples](https://github.com/arjstack/terraform-azure-examp
 
 #### initiatives
 
+Each Initiative Map is configuration with the following properties
+
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
 | <a name="name"></a> [name](#input\_name) | The name of the Initiative (policy set) definition. | `string` |  | yes |
 | <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the Initiative (policy set) definition. | `string` | `<Initiative Name>` | no |
-| <a name="type"></a> [name](#input\_type) | The Initiative type. | `string` | `Custom` | no |
+| <a name="type"></a> [name](#input\_type) | The Initiative type. | `string` | `"Custom"` | no |
 | <a name="description"></a> [description](#input\_description) | The description of the Initiative (policy set) definition. | `string` | `""` | no |
 | <a name="custom_policies"></a> [custom_policies](#input\_custom\_policies) | List of Custom Policies (defined in `policies`) which should be part of Initiative | `any` | `[]` | no |
 | <a name="builtin_policies"></a> [builtin_policies](#input\_builtin\_policies) | List of Azure Built-In or Already created Custom Policies which should be part of Initiative | `any` | `[]` | no |
 | <a name="metadata"></a> [metadata](#input\_metadata) | The metadata for the policy definition. | `any` | <pre>{<br>   "category": "General"<br>   "version": "1.0.0"<br>} | no |
-| <a name="assignments"></a> [assignments](#assignments) | List of Policy Assignments at the specified scopes. | `any` | `[]` | no |
+| <a name="assignments"></a> [assignments](#assignments) | List of Initiative Assignments at the specified scopes. | `any` | `[]` | no |
 | <a name="non_compliance_messages"></a> [non_compliance_messages](#input\_non\_compliance\_messages) | The Map of non-compliance message(s). | `map(string)` | `{}` | no |
 | <a name="specific_role_definition_ids"></a> [specific_role_definition_ids](#input\_specific\_role\_definition\_ids) | The name of the policy definition. | `list(string)` | `[]` | no |
 
