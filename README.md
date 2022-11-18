@@ -45,7 +45,7 @@ Refer [Configuration Examples](https://github.com/arjstack/terraform-azure-examp
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
 | <a name="name"></a> [name](#input\_name) | The name of the policy definition. | `string` |  | yes |
-| <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the policy definition. | `string` |  | no |
+| <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the policy definition. | `string` | ``<Policy Name>` | no |
 | <a name="description"></a> [description](#input\_description) | The description of the policy definition. | `string` |  | no |type
 | <a name="type"></a> [name](#input\_type) | The policy type. | `string` | `Custom` | no |
 | <a name="mode"></a> [mode](#input\_mode) | The policy resource manager mode that allows you to specify which resource types will be evaluated. | `string` | `All` | no |
@@ -60,9 +60,9 @@ Refer [Configuration Examples](https://github.com/arjstack/terraform-azure-examp
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
 | <a name="name"></a> [name](#input\_name) | The name of the Initiative (policy set) definition. | `string` |  | yes |
-| <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the Initiative (policy set) definition. | `string` |  | no |
+| <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the Initiative (policy set) definition. | `string` | `<Initiative Name>` | no |
 | <a name="type"></a> [name](#input\_type) | The Initiative type. | `string` | `Custom` | no |
-| <a name="description"></a> [description](#input\_description) | The description of the Initiative (policy set) definition. | `string` |  | no |
+| <a name="description"></a> [description](#input\_description) | The description of the Initiative (policy set) definition. | `string` | `""` | no |
 | <a name="custom_policies"></a> [custom_policies](#input\_custom\_policies) | List of Custom Policies (defined in `policies`) which should be part of Initiative | `any` | `[]` | no |
 | <a name="builtin_policies"></a> [builtin_policies](#input\_builtin\_policies) | List of Azure Built-In or Already created Custom Policies which should be part of Initiative | `any` | `[]` | no |
 | <a name="metadata"></a> [metadata](#input\_metadata) | The metadata for the policy definition. | `any` | <pre>{<br>   "category": "General"<br>   "version": "1.0.0"<br>} | no |
@@ -80,7 +80,7 @@ Refer [Configuration Examples](https://github.com/arjstack/terraform-azure-examp
 | <a name="scope"></a> [scope](#input\_scope) | The Scope at which the Policy/Initiative Assignment should be applied, which must be a Resource ID | `string` |  | yes |
 | <a name="not_scope"></a> [not_scope](#input\_not_scope) | A list of the Polic/Initiativey Assignment's excluded scopes. The list must contain Resource IDs | `list(string)` | `[]` | no |
 | <a name="parameters"></a> [parameters](#input\_parameters) | Parameters for the policy/Initiative definition. | `any` | `{}` | no |
-| <a name="metadata"></a> [metadata](#input\_metadata) | The metadata for the policy/Initiative assignment. | `map(string)` | `{}` | no |
+| <a name="metadata"></a> [metadata](#input\_metadata) | The metadata for the policy/Initiative assignment. | `map(string)` | `null` | no |
 | <a name="enforcement_mode"></a> [enforcement_mode](#input\_enforcement\_mode) | Can be set to 'true' or 'false' to control whether the assignment is enforced. | `bool` | `true` | no |
 | <a name="location"></a> [location](#input\_location) | The Azure location where this policy/Initiative assignment should exist. | `string` | `null` | no |
 

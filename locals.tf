@@ -60,9 +60,8 @@ locals {
                             management_group_id = var.management_group_id
                             name = initiative.name
                             display_name = lookup(initiative, "display_name", "")
+                            type = lookup(initiative, "type", "Custom")
                             description = lookup(initiative, "description", "")
-                            category = lookup(initiative, "category", "General")
-                            initiative_version = lookup(initiative, "initiative_version", "1.0.0")
                             metadata = lookup(initiative, "metadata", null)
                             builtin_policies = try(initiative.builtin_policies, [])
                             custom_policies = [for policy in initiative.custom_policies: 

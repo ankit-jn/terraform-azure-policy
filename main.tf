@@ -4,7 +4,7 @@ module "policies" {
     for_each = { for policy in local.custom_policies: policy.name => policy }
 
     name = each.value.name
-    display_name = each.value.display_name
+    display_name = try(each.value.display_name, "")
     description = try(each.value.description, "")
 
     type = try(each.value.type, "Custom")
@@ -42,7 +42,7 @@ module "initiatives" {
     name = each.value.name
     display_name = each.value.display_name
     
-    type = try(each.value.type, "Custom")
+    type = each.value.type
     
     description = each.value.description
     
