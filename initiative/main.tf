@@ -12,7 +12,7 @@ resource azurerm_policy_set_definition "this" {
     dynamic policy_definition_reference {
         for_each = [for policy_config in local.policy_configs : {
             id         = policy_config.id
-            ref_id     = replace(title(replace(policy_config.name, "/-|_|\\s/", " ")), "/\\s/", "")
+            ref_id     = replace(replace(policy_config.name, "/\\s/", " "), "/\\s/", "")
             parameters = try(jsondecode(policy_config.parameters), "")
             groups     = []
         }]

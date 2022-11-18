@@ -23,7 +23,7 @@ locals {
             name => {
                 for parameter_name, parameter_value in parameters :
                     format("%s_%s", 
-                            replace(title(replace(name, "/-|_|\\s/", " ")), "/\\s/", ""), 
+                            replace(replace(name, "/\\s/", " "), "/\\s/", ""), 
                             parameter_name) => parameter_value
             } if parameters != null
     })...)
