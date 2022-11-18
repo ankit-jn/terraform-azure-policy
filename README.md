@@ -92,8 +92,8 @@ Each Initiative Map is configuration with the following properties
 
 | Name | Type | Description |
 |:------|:------|:------|
-| <a name="policies"></a> [policies](#input\_policies) |  `map(string)` | Map of The Definition IDs of the Custom Policies |
-| <a name="initiatives"></a> [initiatives](#input\_initiatives) |  `map(string)` | Map of The Definition IDs of the Initiatives |
+| <a name="policies"></a> [policies](#input\_policies) |  `map` | Map of the configurations for the Custom Policies |
+| <a name="initiatives"></a> [initiatives](#input\_initiatives) |  `map` | Map of the configurations of the Initiatives |
 
 ### Authors
 
