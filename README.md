@@ -48,8 +48,8 @@ Each Policy Map is created with the following properties:
 |:------|:------|:------|:------|:------:|
 | <a name="name"></a> [name](#input\_name) | The name of the policy definition. | `string` |  | yes |
 | <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the policy definition. | `string` | `<Policy Name>` | no |
-| <a name="description"></a> [description](#input\_description) | The description of the policy definition. | `string` |  | no |type
-| <a name="type"></a> [name](#input\_type) | The policy type. | `string` | `"Custom"` | no |
+| <a name="description"></a> [description](#input\_description) | The description of the policy definition. | `string` | `""` | no |
+| <a name="type"></a> [type](#input\_type) | The policy type. | `string` | `"Custom"` | no |
 | <a name="mode"></a> [mode](#input\_mode) | The policy resource manager mode that allows you to specify which resource types will be evaluated. | `string` | `"All"` | no |
 | <a name="metadata"></a> [metadata](#input\_metadata) | The metadata for the policy definition. | `any` | <pre>{<br>   "category": "General"<br>   "version": "1.0.0"<br>} | no |
 | <a name="policy_file"></a> [policy_file](#input\_policy\_file) | If need to provision, the policy file name with path, relative to root | `null` |  | no |
@@ -65,7 +65,7 @@ Each Initiative Map is configuration with the following properties
 |:------|:------|:------|:------|:------:|
 | <a name="name"></a> [name](#input\_name) | The name of the Initiative (policy set) definition. | `string` |  | yes |
 | <a name="display_name"></a> [display_name](#input\_display\_name) | The display name of the Initiative (policy set) definition. | `string` | `<Initiative Name>` | no |
-| <a name="type"></a> [name](#input\_type) | The Initiative type. | `string` | `"Custom"` | no |
+| <a name="type"></a> [type](#input\_type) | The Initiative type. | `string` | `"Custom"` | no |
 | <a name="description"></a> [description](#input\_description) | The description of the Initiative (policy set) definition. | `string` | `""` | no |
 | <a name="custom_policies"></a> [custom_policies](#input\_custom\_policies) | List of Custom Policies (defined in `policies`) which should be part of Initiative | `any` | `[]` | no |
 | <a name="builtin_policies"></a> [builtin_policies](#input\_builtin\_policies) | List of Azure Built-In or Already created Custom Policies which should be part of Initiative | `any` | `[]` | no |
@@ -75,6 +75,8 @@ Each Initiative Map is configuration with the following properties
 | <a name="specific_role_definition_ids"></a> [specific_role_definition_ids](#input\_specific\_role\_definition\_ids) | The name of the policy definition. | `list(string)` | `[]` | no |
 
 #### assignments
+
+- In case of initiatives, there would be multiple policies which might have same parameters names. To avoid any conflict and to uniquely identify the parameters, initiative parameters are formatted as `<policy name>_<policy paramater_name>`. Refer [Initiative example section](https://github.com/arjstack/terraform-azure-policy/tree/main/initiative) to have more clarity.
 
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
