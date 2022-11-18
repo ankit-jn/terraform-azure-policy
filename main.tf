@@ -20,7 +20,7 @@ module "policy_assignments" {
 
     assignments = try(each.value.assignments, [])
     
-    policy_metadata = lookup(each.value, "metadata", null)
+    policy_metadata = each.value.metadata
     non_compliance_messages = each.value.non_compliance_messages
     
     specific_role_definition_ids = each.value.specific_role_definition_ids

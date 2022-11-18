@@ -22,7 +22,7 @@ locals {
         policy => {
             id                  = data.azurerm_policy_definition.this[policy].id
             name                = data.azurerm_policy_definition.this[policy].name
-            metadata            = try(jsondecode(data.azurerm_policy_definition.this[policy].metadata), {})
+            metadata            = data.azurerm_policy_definition.this[policy].metadata
             role_definition_ids = try(jsondecode(data.azurerm_policy_definition.this[policy].policy_rule).then.details.roleDefinitionIds, [])
         }}
 
@@ -31,7 +31,7 @@ locals {
                                                     id = module.policies[policy.name].configuration.id
                                                     name = policy.name
                                                     assignments = try(policy.assignments, [])
-                                                    metadata = try(module.policies[policy.name].configuration.metadata, null)
+                                                    metadata = try(jsonencode(module.policies[policy.name].configuration.metadata), null)
                                                     non_compliance_messages = try(policy.non_compliance_messages, {})
                                                     specific_role_definition_ids = try(policy.role_definition_ids, [])
                                                     policy_role_definition_ids = module.policies[policy.name].configuration.role_definition_ids
