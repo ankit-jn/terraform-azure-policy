@@ -76,7 +76,7 @@ Each Initiative Map is configuration with the following properties
 
 #### assignments
 
-- In case of initiatives, there would be multiple policies which might have same parameters names. To avoid any conflict and to uniquely identify the parameters, initiative parameters are formatted as `<policy name>_<policy paramater_name>`. Refer [Initiative example section](https://github.com/arjstack/terraform-azure-policy/tree/main/initiative) to have more clarity.
+- In case of initiatives, there would be multiple policies which might have same parameters names. To avoid any conflict and to uniquely identify the parameters, initiative parameters are formatted as `<policy name>_<policy paramater_name>`. Refer [Initiative example](https://github.com/arjstack/terraform-azure-examples/tree/main/azure-policy/initiative) to have more clarity.
 
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
