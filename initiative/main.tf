@@ -2,11 +2,12 @@ resource azurerm_policy_set_definition "this" {
     name         = var.name
     display_name = coalesce(var.display_name, var.name)
     description  = var.description
-    policy_type  = "Custom"
     
+    policy_type  = var.type
+
     management_group_id = var.management_group_id
 
-    metadata   = jsonencode(var.metadata)
+    metadata = try(jsonencode(var.metadata), null)
     parameters = jsonencode(local.initiative_parameters)
 
     dynamic policy_definition_reference {

@@ -4,7 +4,13 @@ module "policies" {
     for_each = { for policy in local.custom_policies: policy.name => policy }
 
     name = each.value.name
+    display_name = each.value.display_name
     description = try(each.value.description, "")
+
+    type = try(each.value.type, "Custom")
+    mode = try(each.value.mode, "All")
+    metadata = try(each.value.metadata, null)
+    
     policy_file = each.value.policy_file
 
     management_group_id = var.management_group_id
@@ -35,6 +41,9 @@ module "initiatives" {
     management_group_id = var.management_group_id
     name = each.value.name
     display_name = each.value.display_name
+    
+    type = try(each.value.type, "Custom")
+    
     description = each.value.description
     
     metadata = each.value.metadata

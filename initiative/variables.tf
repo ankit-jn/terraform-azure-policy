@@ -23,6 +23,16 @@ variable "display_name" {
     }
 }
 
+variable "type" {
+    type        = string
+    description = "The Initiative type."
+
+    validation {
+        condition     = contains(["BuiltIn", "Custom", "NotSpecified", "Static"], var.type)
+        error_message = "Possible Values are `BuiltIn`, `Custom`, `NotSpecified `, `Static`."
+    }
+}
+
 variable "description" {
     description = "The description of the policy set definition (Initiative)."
     type        = string
@@ -34,9 +44,12 @@ variable "description" {
 }
 
 variable "metadata" {
-    description = "The metadata for the policy set definition."
     type        = any
-    default     = null
+    description = "The metadata for the policy set definition."
+    default     = {
+        "category": "General"
+        "version": "1.0.0"
+    }
 }
 
 variable "custom_policies" {
