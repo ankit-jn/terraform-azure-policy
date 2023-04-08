@@ -28,7 +28,7 @@ This module features the following components to be provisioned with different c
 
 ### Examples
 
-Refer [Configuration Examples](https://github.com/arjstack/terraform-azure-examples/tree/main/azure-policy) for effectively utilizing this module.
+Refer [Configuration Examples](https://github.com/ankit-jn/terraform-azure-examples/tree/main/azure-policy) for effectively utilizing this module.
 
 ### Inputs
 ---
@@ -76,7 +76,7 @@ Each Initiative Map is configuration with the following properties
 
 #### assignments
 
-- In case of initiatives, there would be multiple policies which might have same parameters names. To avoid any conflict and to uniquely identify the parameters, initiative parameters are formatted as `<policy name>_<policy paramater_name>`. Refer [Initiative example](https://github.com/arjstack/terraform-azure-examples/tree/main/azure-policy/initiative) to have more clarity.
+- In case of initiatives, there would be multiple policies which might have same parameters names. To avoid any conflict and to uniquely identify the parameters, initiative parameters are formatted as `<policy name>_<policy paramater_name>`. Refer [Initiative example](https://github.com/ankit-jn/terraform-azure-examples/tree/main/azure-policy/initiative) to have more clarity.
 
 | Name | Description | Type | Default | Required |
 |:------|:------|:------|:------|:------:|
@@ -99,4 +99,4 @@ Each Initiative Map is configuration with the following properties
 
 ### Authors
 
-Module is maintained by [Ankit Jain](https://github.com/ankit-jn) with help from [these professional](https://github.com/arjstack/terraform-azure-policy/graphs/contributors).
+Module is maintained by [Ankit Jain](https://github.com/ankit-jn) with help from [these professional](https://github.com/ankit-jn/terraform-azure-policy/graphs/contributors).
